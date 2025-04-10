@@ -1,0 +1,62 @@
+{
+    "userData": [
+        {
+            "id": "8743",
+            "name": "root",
+            "password": "1234"
+        },
+        {
+            "id": "820710",
+            "name": "psplover16",
+            "password": "xup6rmp4vul4"
+        }
+    ],
+    "cardType": [
+        "金鑽"
+    ],
+    "languageType": [
+        "亞英"
+    ],
+    "identificationType": [
+        "鑑定中",
+        "未鑑定",
+        "PSA",
+        "BGS"
+    ],
+    "userAllData": {
+        "820710": {
+            "storeName": "阿孝的店",
+            "precautions": "新埔捷運站面交",
+            "allProduct": [
+                {
+                    "name": "真魔六武眾-紫炎",
+                    "cardType": "金鑽",
+                    "languageType": "亞英",
+                    "depreciation": "100", // 卡況
+                    "identification": "鑑定中",
+                    "identificationNumber": null,
+                    "picture": "",
+                    "cardNumber": "ROTA-AE039",
+                    "pieces": 1,
+                    "cost": "400", // 成本
+                    "note": "",
+                    "marketPrice": ""
+                },
+                {
+                    "name": "天霆號",
+                    "cardType": "金鑽",
+                    "languageType": "亞英",
+                    "depreciation": "100",
+                    "identification": "PSA",
+                    "identificationNumber": "10",
+                    "picture": "",
+                    "cardNumber": "ES01-AE039",
+                    "pieces": 1,
+                    "cost": "1800",
+                    "note": "molly card送的鑑定",
+                    "marketPrice": ""
+                }
+            ]
+        }
+    }
+}
