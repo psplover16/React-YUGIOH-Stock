@@ -12,16 +12,34 @@
         }
     ],
     "cardType": [
-        "金鑽"
+        {
+            "name": "金鑽",
+            "id": "4abc"
+        }
     ],
     "languageType": [
-        "亞英"
+        {
+            "name": "亞英",
+            "id": "c9b5"
+        }
     ],
     "identificationType": [
-        "鑑定中",
-        "未鑑定",
-        "PSA",
-        "BGS"
+        {
+            "name": "鑑定中",
+            "id": "d82b"
+        },
+        {
+            "name": "未鑑定",
+            "id": "c9fd"
+        },
+        {
+            "name": "PSA",
+            "id": "0psa"
+        },
+        {
+            "name": "BGS",
+            "id": "0bgs"
+        }
     ],
     "userAllData": {
         "820710": {
@@ -30,25 +48,25 @@
             "allProduct": [
                 {
                     "name": "真魔六武眾-紫炎",
-                    "cardType": "金鑽",
-                    "languageType": "亞英",
-                    "depreciation": "100", // 卡況
-                    "identification": "鑑定中",
+                    "cardType": "4abc",
+                    "languageType": "c9b5",
+                    "depreciation": "100",
+                    "identification": "d82b",
                     "identificationNumber": null,
                     "picture": "",
                     "cardNumber": "ROTA-AE039",
                     "pieces": 1,
-                    "cost": "400", // 成本
+                    "cost": "400",
                     "note": "",
                     "marketPrice": ""
                 },
                 {
                     "name": "天霆號",
-                    "cardType": "金鑽",
-                    "languageType": "亞英",
+                    "cardType": "4abc",
+                    "languageType": "c9b5",
                     "depreciation": "100",
-                    "identification": "PSA",
-                    "identificationNumber": "10",
+                    "identification": "0psa",
+                    "identificationNumber": 10,
                     "picture": "",
                     "cardNumber": "ES01-AE039",
                     "pieces": 1,

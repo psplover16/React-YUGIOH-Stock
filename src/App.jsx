@@ -1,9 +1,15 @@
-import { useState, useEffect } from "react";
-// import viteLogo from '/vite.svg'
+import { AppRouter } from "@/router";
+import { Provider } from "react-redux";
+import store from "@/store";
 
 function App() {
-  // const [count, setCount] = useState(0)
-  return <>123</>;
+  return (
+    <>
+      <Provider store={store}>
+        <AppRouter />
+      </Provider>
+    </>
+  );
 }
 
 export default App;
