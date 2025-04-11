@@ -15,6 +15,9 @@ npm install tailwindcss @tailwindcss/vite
 去 vite.config.js 設置 plugin tailwindcss()
 @import "tailwindcss";
 
+npm install @headlessui/react
+
+
 https://www.bilibili.com/video/BV1ZB4y1Z7o8?spm_id_from=333.788.videopod.episodes&vd_source=d6c6c5e6ab01af32e05ebe7b7b88ef93&p=81
 
 
