@@ -41,8 +41,9 @@
             "id": "0bgs"
         }
     ],
-    "userAllData": {
-        "820710": {
+    "userAllData": [
+        {
+            "id": "820710",
             "storeName": "阿孝的店",
             "precautions": "新埔捷運站面交",
             "allProduct": [
@@ -76,5 +77,5 @@
                 }
             ]
         }
-    }
+    ]
 }

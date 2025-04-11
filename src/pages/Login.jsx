@@ -1,4 +1,5 @@
-// import { useState, useRef, useEffect } from 'react';
+import { useState, useRef, useEffect } from "react";
+import API from "@/apis";
 // import dayjs from 'dayjs';
 // const newDate = dayjs(new Date()).format('YYYY-MM-DD');
 
@@ -8,8 +9,8 @@ import { setLoginStatus } from "@/store/modules/loginState";
 export default function Login() {
   const { account, password, id } = useSelector((state) => state.loginStatus);
   const dispatch = useDispatch();
-  const changeLogin = () => {
-    console.log(123);
+  const changeLogin = (event) => {
+    event.preventDefault();
     dispatch(
       setLoginStatus({
         account: 1,
@@ -18,14 +19,27 @@ export default function Login() {
       })
     );
   };
+  //
+  useEffect(() => {
+    async function fetchLogin() {
+      const { data } = await API.login({
+        params: { name: "psplover16", password: "xup6rmp4vul4" },
+      });
+      console.log(data);
+    }
+    fetchLogin();
+  }, []);
   return (
-    <>
-      <div className="bg-red-500">
+    <div className="min-w-full min-h-dvh bg-amber-50" onSubmit={changeLogin}>
+      <form className="fixed top-1/2 left-1/2 -translate-1/2">
         <div>
-          {account}:{password}:{id}
+          <input type="text" placeholder="帳號" />
         </div>
-        <button onClick={changeLogin}>123</button>
-      </div>
-    </>
+        <div>
+          <input type="password" placeholder="密碼" />
+        </div>
+        <button type="submit">123</button>
+      </form>
+    </div>
   );
 }
