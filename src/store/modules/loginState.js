@@ -9,6 +9,7 @@ const loginStore = createSlice({
     },
     reducers: {
         setLoginStatus(state, action) {
+            console.log(action)
             state.account = action.payload.account;
             state.password = action.payload.password;
             state.id = action.payload.id;

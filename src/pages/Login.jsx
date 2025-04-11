@@ -1,21 +1,26 @@
-import { useState, useRef, useEffect } from "react";
+import { useState } from "react";
+import { useNavigate } from "react-router-dom";
 import classNames from "classnames/bind";
-// import { Button } from "@headlessui/react";
-import { Button, Description, Field, Input, Label } from "@headlessui/react";
+import { Button, Input } from "@headlessui/react";
 import { HERO_ICONS } from "@/utils/icons.jsx";
 import API from "@/apis";
 // import dayjs from 'dayjs';
 // const newDate = dayjs(new Date()).format('YYYY-MM-DD');
 
-import { useDispatch, useSelector } from "react-redux";
+import { useDispatch } from "react-redux";
 import { setLoginStatus } from "@/store/modules/loginState";
 
 export default function Login() {
+  const navigate = useNavigate();
+
   const [isEyeOpen, setEyeStatus] = useState(false);
   const [formData, setFormData] = useState({
-    account: "",
-    password: "",
+    account: "psplover16",
+    password: "xup6rmp4vul4",
   });
+  const [isAccountNotice, setAccountNotice] = useState(false);
+  const [isPasswordNotice, setPasswordNotice] = useState(false);
+
   const handleFormChange = (e) => {
     const { value, name } = e.target;
     setFormData((prevData) => ({
@@ -23,40 +28,43 @@ export default function Login() {
       [name]: value,
     }));
   };
-  //
-  const { account, password, id } = useSelector((state) => state.loginStatus);
+
   const dispatch = useDispatch();
   const changeLogin = async (event) => {
     event.preventDefault();
-    const { data } = await API.login({
-      params: { name: formData.account, password: formData.password },
-    });
-    console.log(data);
-    dispatch(
-      setLoginStatus({
-        account: 1,
-        password: 2,
-        id: 3,
-      })
-    );
-  };
-  //
-  useEffect(() => {
-    async function fetchLogin() {
-      const { data } = await API.login({
-        params: { name: "psplover16", password: "xup6rmp4vul4" },
-      });
-      console.log(data);
+    const { account, password } = formData;
+
+    if (!account || !password) {
+      setAccountNotice(!account);
+      setPasswordNotice(!password);
+      return;
     }
-    fetchLogin();
-  }, []);
+
+    const { data } = await API.login({
+      params: { name: account, password: password },
+    });
+
+    if (data[0]) {
+      console.log(data[0]);
+      dispatch(
+        setLoginStatus({
+          account: data[0].name,
+          password: data[0].password,
+          id: data[0].id,
+        })
+      );
+      navigate("/index");
+    }
+  };
   return (
     <div className="min-w-full min-h-dvh bg-amber-50">
       <form
-        className="fixed top-1/2 left-1/2 -translate-1/2 flex gap-1 flex-col w-[300px] items-center"
+        className="fixed top-1/2 left-1/2 -translate-1/2 flex gap-2 flex-col w-[300px] items-center"
         onSubmit={changeLogin}
       >
-        <div className="w-full">
+        <div
+          className={classNames("w-full relative", { notice: isAccountNotice })}
+        >
           <Input
             type="text"
             placeholder="帳號"
@@ -72,7 +80,8 @@ export default function Login() {
         <div
           className={classNames(
             "w-full flex justify-between",
-            "w-full rounded-lg border-none bg-black/20 py-1.5 px-3 text-base text-black"
+            "w-full rounded-lg border-none bg-black/20 py-1.5 px-3 text-base text-black",
+            { notice: isPasswordNotice }
           )}
         >
           <Input
@@ -80,6 +89,7 @@ export default function Login() {
             name="password"
             onChange={(e) => handleFormChange(e)}
             placeholder="密碼"
+            value={formData.password}
             className="flex-grow focus:outline-none data-[focus]:outline-2 data-[focus]:-outline-offset-2 data-[focus]:outline-white/25"
           />
           <div className="size-6" onClick={() => setEyeStatus(!isEyeOpen)}>
