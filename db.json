@@ -48,6 +48,7 @@
             "precautions": "新埔捷運站面交",
             "allProduct": [
                 {
+                    "id": "0001",
                     "name": "真魔六武眾-紫炎",
                     "cardType": "4abc",
                     "languageType": "c9b5",
@@ -59,9 +60,11 @@
                     "pieces": 1,
                     "cost": "400",
                     "note": "",
-                    "marketPrice": ""
+                    "marketPrice": "400",
+                    "updateTime": "2025-04-11T16:00:00.000Z"
                 },
                 {
+                    "id": "0002",
                     "name": "天霆號",
                     "cardType": "4abc",
                     "languageType": "c9b5",
@@ -73,7 +76,8 @@
                     "pieces": 1,
                     "cost": "1800",
                     "note": "molly card送的鑑定",
-                    "marketPrice": ""
+                    "marketPrice": "1000",
+                    "updateTime": "2025-04-11T16:00:00.000Z"
                 }
             ]
         }

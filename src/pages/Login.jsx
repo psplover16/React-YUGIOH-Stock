@@ -7,8 +7,6 @@ import API from "@/apis";
 // import dayjs from 'dayjs';
 // const newDate = dayjs(new Date()).format('YYYY-MM-DD');
 
-import { useDispatch } from "react-redux";
-import { setLoginStatus } from "@/store/modules/loginState";
 
 export default function Login() {
   const navigate = useNavigate();
@@ -29,7 +27,6 @@ export default function Login() {
     }));
   };
 
-  const dispatch = useDispatch();
   const changeLogin = async (event) => {
     event.preventDefault();
     const { account, password } = formData;
@@ -45,14 +42,11 @@ export default function Login() {
     });
 
     if (data[0]) {
-      console.log(data[0]);
-      dispatch(
-        setLoginStatus({
-          account: data[0].name,
-          password: data[0].password,
-          id: data[0].id,
-        })
-      );
+      const userData = {
+        account: data[0].name,
+        id: data[0].id,
+      };
+      localStorage.setItem("personData",JSON.stringify(userData));
       navigate("/index");
     }
   };
