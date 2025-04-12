@@ -5,6 +5,7 @@ import Stock from "@/pages/Home/Stock";
 import About from "@/pages/Home/About";
 import Create from "@/pages/Home/Create";
 import Edit from "@/pages/Home/Edit";
+import AddCard from "@/pages/Home/AddCard";
 
 // 創建路由
 const router = createBrowserRouter([
@@ -22,16 +23,20 @@ const router = createBrowserRouter([
         element: <Stock />,
       },
       {
-        path: "create",
-        element: <Create />,
-      },
-      {
         path: "Edit",
         element: <Edit />,
       },
       {
         path: "about",
         element: <About />,
+      },
+      {
+        path: "createOption",
+        element: <Create />,
+      },
+      {
+        path: "addCard",
+        element: <AddCard />,
       },
     ],
   },

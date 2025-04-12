@@ -1,4 +1,4 @@
-import { Link, useNavigate, Outlet } from "react-router-dom";
+import { useLocation, useNavigate, Outlet } from "react-router-dom";
 import { Button } from "@headlessui/react";
 import { useEffect } from "react";
 import API from "@/apis";
@@ -10,23 +10,34 @@ import {
   setIdentificationType,
   setUserAllData,
 } from "@/store/modules/userProductStore";
+import classNames from "classnames";
 
 export default function Home() {
   const navigate = useNavigate();
+  const location = useLocation();
+
   const dispatch = useDispatch();
 
   const navList = [
     {
       name: "庫存頁",
       func: () => navigate("/index"),
+      pathName: "/index",
     },
     {
-      name: "新建頁",
-      func: () => navigate("create"),
+      name: "新增選項",
+      func: () => navigate("createOption"),
+      pathName: "/index/createOption",
+    },
+    {
+      name: "增加卡片",
+      func: () => navigate("addCard"),
+      pathName: "/index/addCard",
     },
     {
       name: "關於我",
       func: () => navigate("about"),
+      pathName: "/index/about",
     },
     {
       name: "登出",
@@ -34,6 +45,7 @@ export default function Home() {
         localStorage.removeItem("personData");
         navigate("/");
       },
+      pathName: "",
     },
   ];
 
@@ -47,11 +59,6 @@ export default function Home() {
           API.getIidentificationOption(),
           API.getUserAllData({ params: { id: userId } }),
         ]);
-
-      console.log("Card Option:", cardOption.data);
-      console.log("Language Option:", languageOption.data);
-      console.log("Identification Option:", identificationOption.data);
-      console.log("Identification Option:", userAllData.data);
 
       dispatch(setCardType(cardOption.data));
       dispatch(setLanguageType(languageOption.data));
@@ -68,7 +75,7 @@ export default function Home() {
     // const newTime = new Date(dayJSTime).toISOString();
     // console.log(newTime);
     // console.log(dayjs(new Date(newTime)).format("YYYY/MM/DD"));
-
+    console.log(location.pathname);
     fetchData();
   }, []);
 
@@ -79,7 +86,11 @@ export default function Home() {
           {navList.map((val, key) => (
             <Button
               key={key}
-              className="rounded bg-amber-600 py-2 px-4 text-sm text-white data-[hover]:bg-amber-500 data-[active]:bg-amber-700"
+              className={`rounded  py-2 px-4 text-sm text-white ${
+                val.pathName === location.pathname
+                  ? "bg-red-600 data-[hover]:bg-red-500 data-[active]:bg-red-700"
+                  : "bg-amber-600 data-[hover]:bg-amber-500 data-[active]:bg-amber-700"
+              }`}
               onClick={val.func}
             >
               {val.name}
