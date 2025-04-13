@@ -1,85 +1,97 @@
 {
-    "userData": [
+  "userData": [
+    {
+      "id": "8743",
+      "name": "root",
+      "password": "1234"
+    },
+    {
+      "id": "820710",
+      "name": "psplover16",
+      "password": "xup6rmp4vul4"
+    }
+  ],
+  "cardType": [
+    {
+      "name": "金鑽",
+      "id": "4abc"
+    },
+    {
+      "id": "a604",
+      "name": "白鑽"
+    },
+    {
+      "id": "2e94",
+      "name": "全鑽"
+    },
+    {
+      "id": "b5df",
+      "name": "紅鑽"
+    }
+  ],
+  "languageType": [
+    {
+      "name": "亞英",
+      "id": "c9b5"
+    }
+  ],
+  "identificationType": [
+    {
+      "name": "鑑定中",
+      "id": "d82b"
+    },
+    {
+      "name": "未鑑定",
+      "id": "c9fd"
+    },
+    {
+      "name": "PSA",
+      "id": "0psa"
+    },
+    {
+      "name": "BGS",
+      "id": "0bgs"
+    }
+  ],
+  "userAllData": [
+    {
+      "id": "820710",
+      "storeName": "阿孝的店",
+      "precautions": "新埔捷運站面交",
+      "allProduct": [
         {
-            "id": "8743",
-            "name": "root",
-            "password": "1234"
+          "id": "0001",
+          "name": "真魔六武眾-紫炎",
+          "cardType": "4abc",
+          "languageType": "c9b5",
+          "depreciation": "100",
+          "identification": "d82b",
+          "identificationNumber": null,
+          "picture": "",
+          "cardNumber": "ROTA-AE039",
+          "pieces": 1,
+          "cost": "400",
+          "note": "",
+          "marketPrice": "400",
+          "updateTime": "2025-04-11T16:00:00.000Z"
         },
         {
-            "id": "820710",
-            "name": "psplover16",
-            "password": "xup6rmp4vul4"
+          "id": "0002",
+          "name": "天霆號",
+          "cardType": "4abc",
+          "languageType": "c9b5",
+          "depreciation": "100",
+          "identification": "0psa",
+          "identificationNumber": 10,
+          "picture": "",
+          "cardNumber": "ES01-AE039",
+          "pieces": 1,
+          "cost": "1800",
+          "note": "molly card送的鑑定",
+          "marketPrice": "1000",
+          "updateTime": "2025-04-11T16:00:00.000Z"
         }
-    ],
-    "cardType": [
-        {
-            "name": "金鑽",
-            "id": "4abc"
-        }
-    ],
-    "languageType": [
-        {
-            "name": "亞英",
-            "id": "c9b5"
-        }
-    ],
-    "identificationType": [
-        {
-            "name": "鑑定中",
-            "id": "d82b"
-        },
-        {
-            "name": "未鑑定",
-            "id": "c9fd"
-        },
-        {
-            "name": "PSA",
-            "id": "0psa"
-        },
-        {
-            "name": "BGS",
-            "id": "0bgs"
-        }
-    ],
-    "userAllData": [
-        {
-            "id": "820710",
-            "storeName": "阿孝的店",
-            "precautions": "新埔捷運站面交",
-            "allProduct": [
-                {
-                    "id": "0001",
-                    "name": "真魔六武眾-紫炎",
-                    "cardType": "4abc",
-                    "languageType": "c9b5",
-                    "depreciation": "100",
-                    "identification": "d82b",
-                    "identificationNumber": null,
-                    "picture": "",
-                    "cardNumber": "ROTA-AE039",
-                    "pieces": 1,
-                    "cost": "400",
-                    "note": "",
-                    "marketPrice": "400",
-                    "updateTime": "2025-04-11T16:00:00.000Z"
-                },
-                {
-                    "id": "0002",
-                    "name": "天霆號",
-                    "cardType": "4abc",
-                    "languageType": "c9b5",
-                    "depreciation": "100",
-                    "identification": "0psa",
-                    "identificationNumber": 10,
-                    "picture": "",
-                    "cardNumber": "ES01-AE039",
-                    "pieces": 1,
-                    "cost": "1800",
-                    "note": "molly card送的鑑定",
-                    "marketPrice": "1000",
-                    "updateTime": "2025-04-11T16:00:00.000Z"
-                }
-            ]
-        }
-    ]
+      ]
+    }
+  ]
 }

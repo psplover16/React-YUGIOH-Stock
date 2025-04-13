@@ -10,4 +10,9 @@ export default defineConfig({
       "@": [path.resolve(__dirname, "./src")], // 設置路徑代表的東西
     },
   },
+  server: {
+    watch: {
+      ignored: ['**/db.json'], // 忽略特定路徑的文件，避免後端影響前端
+    }
+  },
 })
