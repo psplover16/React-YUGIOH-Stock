@@ -19,31 +19,19 @@ const userProductStore = createSlice({
     setCardType(state, action) {
       state.cardType = action.payload;
     },
-    //     async setSpecifyCardType(state, action) {
-    //       //   action.payload = {
-    //       //     APItype: "打哪個API",
-    //       //     name: "",
-    //       //     id: "",
-    //       //   };
-    // console.log(action.payload.name)
-    //       // 檢查 name，若沒有重複，則打API
-    //     //   if (checkSameList(state.cardType, "name", action.payload.name)) return;
-
-    //     //   const { data } = await API[action.payload.APItype]({
-    //     //     name: action.payload.name,
-    //     //   });
-    //     //   console.log(data);
-
-    //       // 判斷id,相同的取代
-    //       //   const sameId = state.cardType.findIndex(
-    //       //     (item) =>
-    //       //       item.id === action.payload.id || item.name === action.payload.name
-    //       //   );
-    //       //   console.log(sameId);
-    //       //   若
-    //       //   if (sameId.length === state.cardType.length) console.log(sameId);
-    //       //   state.cardType = sameId;
-    //     },
+    setSpecifyCardType(state, action) {
+      // 判斷id 與 name,找出相同
+      const sameId = state.cardType.findIndex(
+        (item) =>
+          item.id === action.payload.id || item.name === action.payload.name
+      );
+      // 若沒相同則新增
+      if (sameId === -1) {
+        state.cardType.push(action.payload)
+      } else {
+        state.cardType[sameId] = action.payload
+      }
+    },
     setLanguageType(state, action) {
       state.languageType = action.payload;
     },
@@ -56,25 +44,28 @@ const userProductStore = createSlice({
   },
 });
 
-const { setCardType, setLanguageType, setIdentificationType, setUserAllData } =
+const { setCardType, setLanguageType, setIdentificationType, setUserAllData, setSpecifyCardType } =
   userProductStore.actions;
 
-function setSpecifyCardType(url) {
-  return async (dispatch) => {
-    // const { data } = await axios.get(url);
-    // console.log(data)
-    console.log(userProductStore)
-    console.log(userProductStore.getSelectors().cardType
-    );
+function fetchSpecifyStatus(dealData) {
+  return async (dispatch, getState) => {
+    // 獲取本地的 state
+    const state = getState();
+    const cardType = state.userProductData.cardType;
+    if (checkSameList(cardType, "name", dealData.name)) return;
 
-    // //
-    // dispatch(setCardType(data));
+    const { data } = await API[dealData.APItype]({
+      name: dealData.name,
+      id: dealData?.id,
+    });
+
+    dispatch(setSpecifyCardType(data));
   };
 }
 
 export {
   setCardType,
-  setSpecifyCardType,
+  fetchSpecifyStatus,
   setLanguageType,
   setIdentificationType,
   setUserAllData,

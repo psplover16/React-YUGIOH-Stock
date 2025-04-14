@@ -4,7 +4,7 @@ import { useSelector, useDispatch } from "react-redux";
 import classNames from "classnames";
 import API from "@/apis/index";
 
-import { setSpecifyCardType } from "@/store/modules/userProductStore";
+import { fetchSpecifyStatus } from "@/store/modules/userProductStore";
 
 export default function Popout({
   changeOptionWordInput, // popOut要顯示的文字
@@ -47,18 +47,10 @@ export default function Popout({
     });
   }, []);
 
-  function checkSameList(originalList, inspectedObjKey, inspectionStandards) {
-    return originalList.find(
-      (item) => item[inspectedObjKey] === inspectionStandards
-    );
-  }
-
   const changeOptionWord = async () => {
     switch (operateType) {
       case "editCardOption":
-        // input與列表檢查是否有相同
-        const { data } = await API.editCardOption(changeOptionWordInput);
-        dispatch(setSpecifyCardType(data,'edit'));
+        dispatch(fetchSpecifyStatus({ ...changeOptionWordInput, APItype: "editCardOption" }));
         break;
     }
     setPopout(false);

@@ -4,7 +4,7 @@ import { Button, Input } from "@headlessui/react";
 import API from "@/apis/index";
 import classNames from "classnames";
 import Popout from "@/components/popOut";
-import { setSpecifyCardType } from "@/store/modules/userProductStore";
+import { fetchSpecifyStatus } from "@/store/modules/userProductStore";
 
 const EDIT_OPERATETYPE = Object.freeze({
   cardType: {
@@ -24,12 +24,8 @@ export default function Create() {
 
   const addCardTypeFunc = async () => {
     if (!addCardTypeInput) return;
-    // const { data } = await API.fetchCardOption({
-    //   name: addCardTypeInput,
-    // });
-    console.log(addCardTypeInput);
     dispatch(
-      setSpecifyCardType({ name: addCardTypeInput, APItype: "fetchCardOption" })
+      fetchSpecifyStatus({ name: addCardTypeInput, APItype: "fetchCardOption" })
     );
   };
 
