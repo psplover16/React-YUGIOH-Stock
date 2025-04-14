@@ -1,3 +1,4 @@
+import { useState, useRef, useEffect } from "react";
 import { Button, Input } from "@headlessui/react";
 import classNames from "classnames";
 
@@ -7,8 +8,49 @@ export default function Popout({
   setPopout,
   changeOptionWord,
 }) {
+  const popOutRef = useRef(null);
+  const [dragOffset, setDragOffset] = useState({ x: 0, y: 0 });
+  const [mousePos, setMousePos] = useState({ x: 500, y: 500 });
+  const [isDrag, setIsDrag] = useState(false);
+
+  const dragStart = (e) => {
+    setIsDrag(true);
+    const rect = popOutRef.current.getBoundingClientRect();
+    setDragOffset({ x: e.clientX - rect.left, y: e.clientY - rect.top });
+  };
+
+  const dragMove = (e) => {
+    if (!isDrag) return;
+    setMousePos({
+      x: e.clientX - dragOffset.x,
+      y: e.clientY - dragOffset.y,
+    });
+  };
+
+  const dragDown = () => {
+    setIsDrag(false);
+  };
+
+  useEffect(() => {
+    const rect = popOutRef.current.getBoundingClientRect();
+    setMousePos({
+      x: window.innerWidth / 2 - rect.width / 2,
+      y: window.innerHeight / 2 - rect.height / 2,
+    });
+  }, []);
+
   return (
-    <div className="fixed top-1/2 left-1/2 -translate-1/2 w-[300px] bg-yellow-200 flex flex-col gap-4 items-center p-6 rounded-2xl">
+    <div
+      ref={popOutRef}
+      className="fixed w-[300px] bg-yellow-200 rounded-2xl flex flex-col gap-4 items-center"
+      style={{ left: `${mousePos.x}px`, top: `${mousePos.y}px` }}
+    >
+      <div
+        className=" w-full bg-yellow-400 h-6 shrink-0 rounded-t-2xl"
+        onMouseDown={dragStart}
+        onMouseMove={dragMove}
+        onMouseUp={dragDown}
+      ></div>
       <p className="text-4xl">更改選項文字</p>
       <Input
         type="text"
