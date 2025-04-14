@@ -40,11 +40,6 @@ export default function Create() {
     // });
   };
 
-  const changeOptionWord = async () => {
-    console.log(changeOptionWordInput);
-    setPopout(false);
-  };
-
   return (
     <div>
       {isPopout && (
@@ -53,7 +48,6 @@ export default function Create() {
           changeOptionWordInput={changeOptionWordInput}
           setChangeOptionWordInput={setChangeOptionWordInput}
           setPopout={setPopout}
-          changeOptionWord={changeOptionWord}
         />
       )}
 
