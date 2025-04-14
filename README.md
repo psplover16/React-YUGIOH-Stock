@@ -22,4 +22,5 @@ https://www.bilibili.com/video/BV1ZB4y1Z7o8?spm_id_from=333.788.videopod.episode
 
 
 
-           
+新增，檢查 name，若沒有重複，則打API新增，添加store
+編輯，檢查 name，若沒有重複，則打API新增，撈取與ID相同的store，編輯

@@ -1,6 +1,10 @@
 import { useState, useRef, useEffect } from "react";
 import { Button, Input } from "@headlessui/react";
+import { useSelector, useDispatch } from "react-redux";
 import classNames from "classnames";
+import API from "@/apis/index";
+
+import { setSpecifyCardType } from "@/store/modules/userProductStore";
 
 export default function Popout({
   changeOptionWordInput, // popOut要顯示的文字
@@ -8,6 +12,10 @@ export default function Popout({
   setPopout, // 開關popOut
   operateType, // popOut樣式 (關係到確認要打哪隻API)
 }) {
+  const { cardType, languageType, identificationType, userAllData } =
+    useSelector((state) => state.userProductData);
+  const dispatch = useDispatch();
+  // 滑鼠拖曳用
   const popOutRef = useRef(null);
   const [dragOffset, setDragOffset] = useState({ x: 0, y: 0 });
   const [mousePos, setMousePos] = useState({ x: 500, y: 500 });
@@ -30,7 +38,7 @@ export default function Popout({
   const dragDown = () => {
     setIsDrag(false);
   };
-
+  //
   useEffect(() => {
     const rect = popOutRef.current.getBoundingClientRect();
     setMousePos({
@@ -39,9 +47,20 @@ export default function Popout({
     });
   }, []);
 
+  function checkSameList(originalList, inspectedObjKey, inspectionStandards) {
+    return originalList.find(
+      (item) => item[inspectedObjKey] === inspectionStandards
+    );
+  }
+
   const changeOptionWord = async () => {
-    console.log(operateType);
-    console.log(changeOptionWordInput);
+    switch (operateType) {
+      case "editCardOption":
+        // input與列表檢查是否有相同
+        const { data } = await API.editCardOption(changeOptionWordInput);
+        dispatch(setSpecifyCardType(data,'edit'));
+        break;
+    }
     setPopout(false);
   };
 
@@ -62,8 +81,13 @@ export default function Popout({
         <Input
           type="text"
           placeholder="帳號"
-          value={changeOptionWordInput}
-          onChange={(e) => setChangeOptionWordInput(e.target.value)}
+          value={changeOptionWordInput.name}
+          onChange={(e) =>
+            setChangeOptionWordInput({
+              id: changeOptionWordInput.id,
+              name: e.target.value,
+            })
+          }
           className={classNames(
             "w-full block rounded-lg border-none bg-black/20 py-1.5 px-3 text-base text-black",
             "focus:outline-none data-[focus]:outline-2 data-[focus]:-outline-offset-2 data-[focus]:outline-white/25"
