@@ -1,45 +1,53 @@
-import { useState } from "react";
+import { useState, useMemo } from "react";
 import { useSelector, useDispatch } from "react-redux";
 import { Button, Input } from "@headlessui/react";
-import API from "@/apis/index";
 import classNames from "classnames";
 import Popout from "@/components/popOut";
 import { fetchSpecifyStatus } from "@/store/modules/userProductStore";
+import API_STORE_DATA_STRUCT from "@/constants/dataStruct";
 
-const EDIT_OPERATETYPE = Object.freeze({
-  cardType: {
-    edit: "editCardOption",
-  },
-});
-
-export default function CreateTemplate() {
-  const { cardType, languageType, identificationType, userAllData } =
-    useSelector((state) => state.userProductData);
+export default function CreateTemplate({
+  struectType, // 要 對哪個 API_STORE_DATA_STRUCT 資料做操作
+  nowHasOptionTitle,
+  addOptionTitle,
+  addOptionPlaceHolder,
+  isDivider,
+}) {
   const dispatch = useDispatch();
-  const [operateType, setOperateType] = useState(null);
 
-  const [addCardTypeInput, setAddCardTypeInput] = useState(""); // 想新增的卡片版本
+  const [addOptionInput, setAddOptionInput] = useState(""); // 想新增的卡片版本
   const [changeOptionWordInput, setChangeOptionWordInput] = useState(""); // 更改選項的文字 (popout)
   const [isPopout, setPopout] = useState(false); // pop狀態
 
+  const allStoeState = useSelector((state) => state.userProductData);
+
+  const dealStoreName = useMemo(
+    () => API_STORE_DATA_STRUCT[struectType].storeDataName,
+    [struectType]
+  );
+
   const addCardTypeFunc = async () => {
-    if (!addCardTypeInput) return;
+    if (!addOptionInput) return;
     dispatch(
-      fetchSpecifyStatus({ name: addCardTypeInput, APItype: "fetchCardOption" })
+      fetchSpecifyStatus({
+        name: addOptionInput,
+        type: struectType,
+        operate: "add",
+      })
     );
   };
 
-  const editCardTypeFunc = async (data) => {
-    setOperateType(EDIT_OPERATETYPE.cardType.edit); // 對哪個種類操作
+  const prepareEditFunc = async (data) => {
     setPopout(true); // 開啟popout
     setChangeOptionWordInput(data); // 設定 input的 name與id
   };
 
   return (
     <div>
+      {/* 彈窗負責編輯的API */}
       {isPopout && (
         <Popout
-          operateType={operateType}
+          struectType={struectType}
           changeOptionWordInput={changeOptionWordInput}
           setChangeOptionWordInput={setChangeOptionWordInput}
           setPopout={setPopout}
@@ -47,30 +55,30 @@ export default function CreateTemplate() {
       )}
 
       <div>
-        <div>目前已有卡片版本</div>
+        <div>{nowHasOptionTitle}</div>
         <div>
-          {cardType.map((val, key) => (
+          {allStoeState[dealStoreName].map((val, key) => (
             <div className="inline-block" key={key}>
               {" "}
               <i
                 className="underline cursor-pointer"
-                onClick={() => editCardTypeFunc(val)}
+                onClick={() => prepareEditFunc(val)}
               >
                 {val.name}
               </i>
-              {key === cardType.length - 1 || "、"}
+              {key === allStoeState[dealStoreName].length - 1 || "、"}
             </div>
           ))}
         </div>
       </div>
       <div className="flex items-center gap-2">
-        <span className="text-nowrap">想新增的卡片版本：</span>
+        <span className="text-nowrap">{addOptionTitle}：</span>
         <Input
           type="text"
-          placeholder="帳號"
-          value={addCardTypeInput}
+          placeholder={addOptionPlaceHolder}
+          value={addOptionInput}
           name="account"
-          onChange={(e) => setAddCardTypeInput(e.target.value)}
+          onChange={(e) => setAddOptionInput(e.target.value)}
           className={classNames(
             "w-[200px] block rounded-lg border-none bg-black/20 py-1.5 px-3 text-base text-black",
             "focus:outline-none data-[focus]:outline-2 data-[focus]:-outline-offset-2 data-[focus]:outline-white/25"
@@ -84,7 +92,7 @@ export default function CreateTemplate() {
           送出
         </Button>
       </div>
-      <hr className="mt-2" />
+      {isDivider && <hr className="mt-2" />}
     </div>
   );
 }

@@ -3,6 +3,7 @@ import { Button, Input } from "@headlessui/react";
 import { useSelector, useDispatch } from "react-redux";
 import classNames from "classnames";
 import API from "@/apis/index";
+import API_STORE_DATA_STRUCT from "@/constants/dataStruct";
 
 import { fetchSpecifyStatus } from "@/store/modules/userProductStore";
 
@@ -10,7 +11,7 @@ export default function Popout({
   changeOptionWordInput, // popOut要顯示的文字
   setChangeOptionWordInput, // 修改 popOut要顯示的文字
   setPopout, // 開關popOut
-  operateType, // popOut樣式 (關係到確認要打哪隻API)
+  struectType, // 關係到確認要打哪隻API
 }) {
   const { cardType, languageType, identificationType, userAllData } =
     useSelector((state) => state.userProductData);
@@ -48,16 +49,13 @@ export default function Popout({
   }, []);
 
   const changeOptionWord = async () => {
-    switch (operateType) {
-      case "editCardOption":
-        dispatch(
-          fetchSpecifyStatus({
-            ...changeOptionWordInput,
-            APItype: "editCardOption",
-          })
-        );
-        break;
-    }
+    dispatch(
+      fetchSpecifyStatus({
+        ...changeOptionWordInput,
+        type: struectType,
+        operate: "edit",
+      })
+    );
     setPopout(false);
   };
 

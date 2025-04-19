@@ -1,5 +1,6 @@
 import { createSlice } from "@reduxjs/toolkit";
 import API from "@/apis/index";
+import API_STORE_DATA_STRUCT from '@/constants/dataStruct';
 
 function checkSameList(originalList, inspectedObjKey, inspectionStandards) {
   return originalList.find(
@@ -16,59 +17,56 @@ const userProductStore = createSlice({
     userAllData: {},
   },
   reducers: {
-    setCardType(state, action) {
-      state.cardType = action.payload;
+    setTargetStoreData(state, action = { type: '', value: '' }) {
+      state[API_STORE_DATA_STRUCT[action.payload.type].storeDataName] = action.payload.value;
     },
-    setSpecifyCardType(state, action) {
+    addOrEditTargetStoreData(state, action = { type: '', value: '' }) {
       // 判斷id 與 name,找出相同
-      const sameId = state.cardType.findIndex(
+      const sameId = state[action.payload.type].findIndex(
         (item) =>
-          item.id === action.payload.id || item.name === action.payload.name
+          item.id === action.payload.value.id || item.name === action.payload.value.name
       );
       // 若沒相同則新增
       if (sameId === -1) {
-        state.cardType.push(action.payload)
+        state[action.payload.type].push(action.payload.value)
       } else {
-        state.cardType[sameId] = action.payload
+        state[action.payload.type][sameId] = action.payload.value
       }
-    },
-    setLanguageType(state, action) {
-      state.languageType = action.payload;
-    },
-    setIdentificationType(state, action) {
-      state.identificationType = action.payload;
-    },
-    setUserAllData(state, action) {
-      state.userAllData = action.payload;
-    },
+    }
   },
 });
 
-const { setCardType, setLanguageType, setIdentificationType, setUserAllData, setSpecifyCardType } =
+const { setTargetStoreData, addOrEditTargetStoreData } =
   userProductStore.actions;
 
-function fetchSpecifyStatus(dealData) {
+function fetchSpecifyStatus(dealData = {
+  type: '要對哪個資料做編輯或新增',
+  operate: 'add || edit',
+  name: '輸入要新增或編輯的名稱',
+  id: '輸入要編輯的id',
+}) {
+  // 輸入參數參考 API_STORE_DATA_STRUCT
   return async (dispatch, getState) => {
     // 獲取本地的 state
     const state = getState();
-    const cardType = state.userProductData.cardType;
-    if (checkSameList(cardType, "name", dealData.name)) return;
+    const operateStoreDataName = API_STORE_DATA_STRUCT[dealData.type].storeDataName
+    const operateStoreData = state.userProductData[operateStoreDataName];
 
-    const { data } = await API[dealData.APItype]({
+    // 檢查指定的索引值 是否有相同的
+    if (checkSameList(operateStoreData, "name", dealData.name)) return;
+
+    const { data } = await API[API_STORE_DATA_STRUCT[dealData.type][dealData.operate + 'APIName']]({
       name: dealData.name,
       id: dealData?.id,
     });
 
-    dispatch(setSpecifyCardType(data));
+    dispatch(addOrEditTargetStoreData({ type: operateStoreDataName, value: data }));
   };
 }
 
 export {
-  setCardType,
+  setTargetStoreData,
   fetchSpecifyStatus,
-  setLanguageType,
-  setIdentificationType,
-  setUserAllData,
 };
 
 const userProductReducer = userProductStore.reducer;

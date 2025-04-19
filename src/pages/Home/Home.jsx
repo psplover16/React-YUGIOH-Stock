@@ -4,12 +4,7 @@ import { useEffect } from "react";
 import API from "@/apis";
 
 import { useDispatch } from "react-redux";
-import {
-  setCardType,
-  setLanguageType,
-  setIdentificationType,
-  setUserAllData,
-} from "@/store/modules/userProductStore";
+import { setTargetStoreData } from "@/store/modules/userProductStore";
 import classNames from "classnames";
 
 export default function Home() {
@@ -60,10 +55,22 @@ export default function Home() {
           API.getUserAllData({ params: { id: userId } }),
         ]);
 
-      dispatch(setCardType(cardOption.data));
-      dispatch(setLanguageType(languageOption.data));
-      dispatch(setIdentificationType(identificationOption.data));
-      dispatch(setUserAllData(userAllData.data[0]));
+      dispatch(setTargetStoreData({ type: "cardVersion", value: cardOption.data }));
+      dispatch(
+        setTargetStoreData({ type: "languageType", value: languageOption.data })
+      );
+      dispatch(
+        setTargetStoreData({
+          type: "identificationType",
+          value: identificationOption.data,
+        })
+      );
+      dispatch(
+        setTargetStoreData({
+          type: "allCardData",
+          value: userAllData.data[0],
+        })
+      );
     } catch (error) {
       console.error("Error fetching data:", error);
     }

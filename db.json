@@ -17,38 +17,34 @@
       "id": "4abc"
     },
     {
-      "id": "a604",
-      "name": "白鑽"
+      "name": "白鑽",
+      "id": "a604"
     },
     {
-      "id": "2e94",
-      "name": "全鑽"
+      "name": "全鑽",
+      "id": "96a1"
     },
     {
-      "id": "b5df",
+      "id": "602a",
       "name": "紅鑽"
     },
     {
-      "name": "半鑽",
-      "id": "a6b2"
-    },
-    {
-      "id": "6e49",
-      "name": "普卡"
-    },
-    {
-      "id": "08ee",
-      "name": "隱普"
-    },
-    {
-      "name": "銀字",
-      "id": "5738"
+      "name": "普卡",
+      "id": "9de7"
     }
   ],
   "languageType": [
     {
       "name": "亞英",
       "id": "c9b5"
+    },
+    {
+      "name": "日文",
+      "id": "94bb"
+    },
+    {
+      "id": "0f94",
+      "name": "美英"
     }
   ],
   "identificationType": [
