@@ -50,7 +50,12 @@ export default function Popout({
   const changeOptionWord = async () => {
     switch (operateType) {
       case "editCardOption":
-        dispatch(fetchSpecifyStatus({ ...changeOptionWordInput, APItype: "editCardOption" }));
+        dispatch(
+          fetchSpecifyStatus({
+            ...changeOptionWordInput,
+            APItype: "editCardOption",
+          })
+        );
         break;
     }
     setPopout(false);
@@ -58,48 +63,52 @@ export default function Popout({
 
   return (
     <div
-      ref={popOutRef}
-      className="fixed w-[300px] bg-yellow-200 rounded-2xl"
-      style={{ left: `${mousePos.x}px`, top: `${mousePos.y}px` }}
+      className="w-full h-dvh fixed z-50 left-0 top-0 bg-[rgba(0,0,0,0.4)]"
+      onMouseMove={dragMove}
+      onMouseUp={dragDown}
     >
       <div
-        className=" w-full bg-yellow-400 h-6 shrink-0 rounded-t-2xl"
-        onMouseDown={dragStart}
-        onMouseMove={dragMove}
-        onMouseUp={dragDown}
-      ></div>
-      <div className="p-6 flex flex-col gap-4 items-center">
-        <p className="text-4xl">更改選項文字</p>
-        <Input
-          type="text"
-          placeholder="帳號"
-          value={changeOptionWordInput.name}
-          onChange={(e) =>
-            setChangeOptionWordInput({
-              id: changeOptionWordInput.id,
-              name: e.target.value,
-            })
-          }
-          className={classNames(
-            "w-full block rounded-lg border-none bg-black/20 py-1.5 px-3 text-base text-black",
-            "focus:outline-none data-[focus]:outline-2 data-[focus]:-outline-offset-2 data-[focus]:outline-white/25"
-          )}
-        />
-        <div className="flex gap-2">
-          <Button
-            onClick={() => setPopout(false)}
-            type="button"
-            className="text-nowrap rounded bg-amber-600 py-2 px-4 text-sm text-white data-[hover]:bg-amber-500 data-[active]:bg-amber-700"
-          >
-            關閉
-          </Button>
-          <Button
-            onClick={changeOptionWord}
-            type="button"
-            className="text-nowrap rounded bg-amber-600 py-2 px-4 text-sm text-white data-[hover]:bg-amber-500 data-[active]:bg-amber-700"
-          >
-            確認
-          </Button>
+        ref={popOutRef}
+        className="fixed w-[300px] bg-yellow-200 rounded-2xl"
+        style={{ left: `${mousePos.x}px`, top: `${mousePos.y}px` }}
+      >
+        <div
+          className=" w-full bg-yellow-400 h-6 shrink-0 rounded-t-2xl"
+          onMouseDown={dragStart}
+        ></div>
+        <div className="p-6 flex flex-col gap-4 items-center">
+          <p className="text-4xl">更改選項文字</p>
+          <Input
+            type="text"
+            placeholder="帳號"
+            value={changeOptionWordInput.name}
+            onChange={(e) =>
+              setChangeOptionWordInput({
+                id: changeOptionWordInput.id,
+                name: e.target.value,
+              })
+            }
+            className={classNames(
+              "w-full block rounded-lg border-none bg-black/20 py-1.5 px-3 text-base text-black",
+              "focus:outline-none data-[focus]:outline-2 data-[focus]:-outline-offset-2 data-[focus]:outline-white/25"
+            )}
+          />
+          <div className="flex gap-2">
+            <Button
+              onClick={() => setPopout(false)}
+              type="button"
+              className="text-nowrap rounded bg-amber-600 py-2 px-4 text-sm text-white data-[hover]:bg-amber-500 data-[active]:bg-amber-700"
+            >
+              關閉
+            </Button>
+            <Button
+              onClick={changeOptionWord}
+              type="button"
+              className="text-nowrap rounded bg-amber-600 py-2 px-4 text-sm text-white data-[hover]:bg-amber-500 data-[active]:bg-amber-700"
+            >
+              確認
+            </Button>
+          </div>
         </div>
       </div>
     </div>
