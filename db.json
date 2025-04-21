@@ -83,7 +83,7 @@
           "cardNumber": "ROTA-AE039",
           "pieces": 1,
           "cost": "400",
-          "note": "",
+          "note": "123",
           "marketPrice": "400",
           "updateTime": "2025-04-11T16:00:00.000Z"
         },
@@ -99,7 +99,7 @@
           "cardNumber": "ES01-AE039",
           "pieces": 1,
           "cost": "1800",
-          "note": "molly card送的鑑定",
+          "note": "molly card送的鑑定molly card送的鑑定molly card送的鑑定",
           "marketPrice": "1000",
           "updateTime": "2025-04-11T16:00:00.000Z"
         }
