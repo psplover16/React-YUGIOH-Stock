@@ -11,7 +11,7 @@ export default function Popout({
   changeOptionWordInput, // popOut要顯示的文字
   setChangeOptionWordInput, // 修改 popOut要顯示的文字
   setPopout, // 開關popOut
-  struectType, // 關係到確認要打哪隻API
+  structType, // 關係到確認要打哪隻API
 }) {
   const { cardType, languageType, identificationType, userAllData } =
     useSelector((state) => state.userProductData);
@@ -52,7 +52,7 @@ export default function Popout({
     dispatch(
       fetchSpecifyStatus({
         ...changeOptionWordInput,
-        type: struectType,
+        type: structType,
         operate: "edit",
       })
     );

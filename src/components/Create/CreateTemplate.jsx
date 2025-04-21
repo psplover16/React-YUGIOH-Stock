@@ -7,7 +7,7 @@ import { fetchSpecifyStatus } from "@/store/modules/userProductStore";
 import API_STORE_DATA_STRUCT from "@/constants/dataStruct";
 
 export default function CreateTemplate({
-  struectType, // 要 對哪個 API_STORE_DATA_STRUCT 資料做操作
+  structType, // 要 對哪個 API_STORE_DATA_STRUCT 資料做操作
   nowHasOptionTitle,
   addOptionTitle,
   addOptionPlaceHolder,
@@ -22,8 +22,8 @@ export default function CreateTemplate({
   const allStoeState = useSelector((state) => state.userProductData);
 
   const dealStoreName = useMemo(
-    () => API_STORE_DATA_STRUCT[struectType].storeDataName,
-    [struectType]
+    () => API_STORE_DATA_STRUCT[structType].storeDataName,
+    [structType]
   );
 
   const addCardTypeFunc = async () => {
@@ -31,7 +31,7 @@ export default function CreateTemplate({
     dispatch(
       fetchSpecifyStatus({
         name: addOptionInput,
-        type: struectType,
+        type: structType,
         operate: "add",
       })
     );
@@ -47,7 +47,7 @@ export default function CreateTemplate({
       {/* 彈窗負責編輯的API */}
       {isPopout && (
         <Popout
-          struectType={struectType}
+          structType={structType}
           changeOptionWordInput={changeOptionWordInput}
           setChangeOptionWordInput={setChangeOptionWordInput}
           setPopout={setPopout}
