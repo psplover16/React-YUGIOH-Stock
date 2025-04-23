@@ -1,5 +1,4 @@
 import classNames from "classnames";
-import { Button } from "@headlessui/react";
 
 export default function StockTable({
   theadData, // STOCK_TITLE
@@ -11,9 +10,7 @@ export default function StockTable({
   //   onChange={(e) => setSearchStr(e.target.value)}
   // />
   tbodyData, // filterStockData
-  
-  noWrapKey,
-  titleKey,
+
   formatTdWord,
   editItem,
 }) {
