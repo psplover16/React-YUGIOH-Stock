@@ -6,7 +6,7 @@ export default function StockTable({
   emptyTheadTd,
   tbodyData,
   noWrapTdKey,
-  formatTdWord,
+  formatTdWord = (valKey, valValue) => valValue,
   editItem,
 }) {
   return (
@@ -32,8 +32,8 @@ export default function StockTable({
         {tbodyData?.map((allVal, allKey) => (
           <tr
             key={allKey}
-            onClick={() => editItem(allVal.id)}
-            className="cursor-pointer"
+            onClick={() => editItem(allVal?.id)}
+            className={classNames(editItem && "cursor-pointer")}
           >
             {theadData.map((stockVal, stockKey) => (
               <td
@@ -60,7 +60,12 @@ export default function StockTable({
                       "max-w-[230px] truncate": stockKey === 12,
                     })}
                   >
-                    {formatTdWord(stockVal.APIKey, allVal[stockVal.APIKey])}
+                    {formatTdWord(
+                      stockVal.APIKey,
+                      allVal,
+                      allKey,
+                      stockKey
+                    )}
                   </div>
                 </div>
               </td>

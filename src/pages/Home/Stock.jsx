@@ -11,7 +11,8 @@ export default function Stock() {
     useSelector((state) => state.userProductData);
   const [searchStr, setSearchStr] = useState("");
 
-  const formatTdWord = (key, str) => {
+  const formatTdWord = (key, stringList) => {
+    let str = stringList[key];
     let sendStr;
     switch (key) {
       case "languageType":
@@ -64,20 +65,31 @@ export default function Stock() {
   }, [userAllData, searchStr]);
 
   return (
-    <StockTable
-      theadData={STOCK_TITLE}
-      emptyTheadTd={
-        <input
-          type="text"
-          placeholder="搜索欄位"
-          className="bg-amber-50"
-          onChange={(e) => setSearchStr(e.target.value)}
-        />
-      }
-      tbodyData={filterStockData}
-      formatTdWord={formatTdWord}
-      editItem={editItem}
-      noWrapTdKey={[1]}
-    ></StockTable>
+    <>
+      <StockTable
+        theadData={STOCK_TITLE}
+        emptyTheadTd={
+          <input
+            type="text"
+            placeholder="搜索欄位"
+            className="bg-amber-50"
+            onChange={(e) => setSearchStr(e.target.value)}
+          />
+        }
+        tbodyData={filterStockData}
+        formatTdWord={formatTdWord}
+        editItem={editItem}
+        noWrapTdKey={[1]}
+      ></StockTable>
+      <div>
+        <Button
+          onClick={() => console.log(filterStockData)}
+          type="button"
+          className="text-nowrap rounded bg-amber-600 py-2 px-4 text-sm text-white data-[hover]:bg-amber-500 data-[active]:bg-amber-700"
+        >
+          新增
+        </Button>
+      </div>
+    </>
   );
 }
