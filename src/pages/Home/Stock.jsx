@@ -74,7 +74,7 @@ export default function Stock() {
               {val.name}
             </th>
           ))}
-          <th className="border border-gray-300 py-2">
+          <th className="border border-gray-300 p-2">
             <input
               type="text"
               placeholder="搜索欄位"
@@ -89,6 +89,7 @@ export default function Stock() {
           <tr
             className={allKey % 2 === 0 ? "bg-white" : "bg-gray-100"}
             key={allKey}
+            onClick={() => editItem(allVal.id)}
           >
             {STOCK_TITLE.map((stockVal, stockKey) => (
               <td
@@ -106,26 +107,14 @@ export default function Stock() {
                 <div className="flex items-center justify-between">
                   <div
                     className={classNames({
-                      "max-w-[180px] truncate": stockKey === 12,
+                      "max-w-[230px] truncate": stockKey === 12,
                     })}
                   >
                     {formatTdWord(stockVal.APIKey, allVal[stockVal.APIKey])}
                   </div>
-
-                  {stockKey === 12 && (
-                    <Button
-                      className="text-nowrap rounded bg-gray-600 py-2 px-4 text-sm text-white data-[hover]:bg-gray-500 data-[active]:bg-gray-700"
-                      onClick={() => editItem(allVal.id)}
-                    >
-                      編輯
-                    </Button>
-                  )}
                 </div>
               </td>
             ))}
-            {/* <td className="border border-gray-300 px-1 py-2 text-center">
-  
-            </td> */}
           </tr>
         ))}
       </tbody>
