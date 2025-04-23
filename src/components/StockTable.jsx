@@ -1,4 +1,5 @@
 import classNames from "classnames";
+import styles from "@/style/custom.module.scss";
 
 export default function StockTable({
   theadData, // STOCK_TITLE
@@ -15,7 +16,9 @@ export default function StockTable({
   editItem,
 }) {
   return (
-    <table className="min-w-full border border-gray-300">
+    <table
+      className={classNames("min-w-full border border-gray-300", styles.table)}
+    >
       <thead>
         <tr className="bg-gray-200">
           {theadData.map((val, key) => (
@@ -31,11 +34,7 @@ export default function StockTable({
       </thead>
       <tbody>
         {tbodyData?.map((allVal, allKey) => (
-          <tr
-            className={allKey % 2 === 0 ? "bg-white" : "bg-gray-100"}
-            key={allKey}
-            onClick={() => editItem(allVal.id)}
-          >
+          <tr key={allKey} onClick={() => editItem(allVal.id)}>
             {theadData.map((stockVal, stockKey) => (
               <td
                 className={classNames("border border-gray-300 px-4 py-2", {
@@ -55,7 +54,6 @@ export default function StockTable({
                       "max-w-[230px] truncate": stockKey === 12,
                     })}
                   >
-
                     {formatTdWord(stockVal.APIKey, allVal[stockVal.APIKey])}
                   </div>
                 </div>
