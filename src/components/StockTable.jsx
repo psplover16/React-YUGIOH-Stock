@@ -2,16 +2,10 @@ import classNames from "classnames";
 import styles from "@/style/custom.module.scss";
 
 export default function StockTable({
-  theadData, // STOCK_TITLE
-  emptyTheadTd, // setSearchStr
-  //   <input
-  //   type="text"
-  //   placeholder="搜索欄位"
-  //   className="bg-amber-50"
-  //   onChange={(e) => setSearchStr(e.target.value)}
-  // />
-  tbodyData, // filterStockData
-
+  theadData,
+  emptyTheadTd,
+  tbodyData,
+  noWrapTdKey,
   formatTdWord,
   editItem,
 }) {
@@ -29,24 +23,36 @@ export default function StockTable({
               {val.name}
             </th>
           ))}
-          <th className="border border-gray-300 p-2">{emptyTheadTd}</th>
+          {emptyTheadTd && (
+            <th className="border border-gray-300 p-2">{emptyTheadTd}</th>
+          )}
         </tr>
       </thead>
       <tbody>
         {tbodyData?.map((allVal, allKey) => (
-          <tr key={allKey} onClick={() => editItem(allVal.id)}>
+          <tr
+            key={allKey}
+            onClick={() => editItem(allVal.id)}
+            className="cursor-pointer"
+          >
             {theadData.map((stockVal, stockKey) => (
               <td
                 className={classNames("border border-gray-300 px-4 py-2", {
-                  "text-nowrap": stockVal.APIKey === "cardNumber",
+                  "text-nowrap": noWrapTdKey.includes(stockKey),
                 })}
                 key={stockKey}
                 title={
-                  stockKey === 12
+                  stockKey === theadData.length - 1
                     ? formatTdWord(stockVal.APIKey, allVal[stockVal.APIKey])
                     : undefined
                 }
-                colSpan={stockKey === 12 ? 2 : undefined}
+                colSpan={
+                  emptyTheadTd
+                    ? stockKey === theadData.length - 1
+                      ? 2
+                      : undefined
+                    : undefined
+                }
               >
                 <div className="flex items-center justify-between">
                   <div

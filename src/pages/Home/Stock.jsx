@@ -77,6 +77,7 @@ export default function Stock() {
       tbodyData={filterStockData}
       formatTdWord={formatTdWord}
       editItem={editItem}
+      noWrapTdKey={[1]}
     ></StockTable>
   );
 }
