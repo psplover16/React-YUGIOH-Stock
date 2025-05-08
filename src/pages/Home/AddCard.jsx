@@ -48,17 +48,17 @@ export default function AddCard() {
         tbodyData={tmpAddCard}
         formatTdWord={(APIKey, value, trKey, tdKey) => (
           <>
-            <div>{APIKey}</div>
+            {/* <div>{APIKey}</div>
             <div>{value[APIKey]}</div>
             <div>{trKey}</div>
-            <div>{tdKey}</div>
-            <input
+            <div>{tdKey}</div> */}
+            <textarea
               type="text"
               placeholder="搜索欄位"
-              className="bg-amber-50"
+              className="bg-amber-50 box-border w-full"
               onChange={(e) => editAddCard(e, trKey, APIKey)}
             />
-            <div>
+            {/* <div>
               <Button
                 onClick={() => console.log(value[APIKey])}
                 type="button"
@@ -66,7 +66,7 @@ export default function AddCard() {
               >
                 確認
               </Button>
-            </div>
+            </div> */}
           </>
         )}
         editItem={() => {}}

@@ -11,7 +11,7 @@ export default function StockTable({
 }) {
   return (
     <table
-      className={classNames("min-w-full border border-gray-300", styles.table)}
+      className={classNames("w-full border border-gray-300", styles.table)}
     >
       <thead>
         <tr className="bg-gray-200">
@@ -54,19 +54,12 @@ export default function StockTable({
                     : undefined
                 }
               >
-                <div className="flex items-center justify-between">
-                  <div
-                    className={classNames({
-                      "max-w-[230px] truncate": stockKey === 12,
-                    })}
-                  >
-                    {formatTdWord(
-                      stockVal.APIKey,
-                      allVal,
-                      allKey,
-                      stockKey
-                    )}
-                  </div>
+                <div
+                  className={classNames({
+                    "max-w-[230px] truncate": stockKey === 12,
+                  })}
+                >
+                  {formatTdWord(stockVal.APIKey, allVal, allKey, stockKey)}
                 </div>
               </td>
             ))}
